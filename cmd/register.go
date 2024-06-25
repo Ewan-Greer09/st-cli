@@ -11,6 +11,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+type RegisterAgentResponse struct {
+	Data struct {
+		Token string `json:"token"`
+	} `json:"data"`
+}
+
 // registerCmd represents the register command
 var registerCmd = &cobra.Command{
 	Use:   "register",
@@ -25,14 +31,14 @@ var registerCmd = &cobra.Command{
 			return
 		}
 
-		var content map[string]any
+		var content RegisterAgentResponse
 		err = json.Unmarshal(resp.Body(), &content)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		fmt.Println(content["data"].(map[string]any)["token"])
+		fmt.Println(content.Data.Token)
 	},
 }
 

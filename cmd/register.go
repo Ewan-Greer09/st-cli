@@ -1,15 +1,18 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 Ewan Greer ewanja.greer@gmail.com
 */
 package cmd
 
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/Ewan-Greer09/st-cli/client"
 	"github.com/spf13/cobra"
 )
+
+const AuthTokenKey string = "ST_API_TOKEN"
 
 type RegisterAgentResponse struct {
 	Data struct {
@@ -38,7 +41,7 @@ var registerCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Println(content.Data.Token)
+		os.Setenv(AuthTokenKey, content.Data.Token)
 	},
 }
 
